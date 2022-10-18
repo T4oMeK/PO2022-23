@@ -1,4 +1,5 @@
 package agh.ics.oop;
+import static agh.ics.oop.MapDirection.NORTH;
 import static java.lang.System.out;
 
 public class World {
@@ -38,6 +39,16 @@ public class World {
         out.println("Start");
         run(toDirection(args));
         out.println("Stop");
+        Vector2d position1 = new Vector2d(1,2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+        out.println(MapDirection.toString(MapDirection.NORTH));
+        out.println(MapDirection.toString(MapDirection.next(MapDirection.NORTH)));
+        out.println(MapDirection.toString(MapDirection.previous(MapDirection.NORTH)));
+        Vector2d testres = MapDirection.toUnitVector(MapDirection.NORTH);
+        out.println(testres.toString());
     }
 }
 

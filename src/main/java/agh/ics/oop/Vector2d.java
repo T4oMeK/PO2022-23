@@ -62,8 +62,22 @@ public class Vector2d {
     public Vector2d opposite() {
         return new Vector2d(-this.x, -this.y);
     }
-
+    @Override
     public boolean equals(Object other) {
-
+        if (other == this) {
+            return true;
+        }
+        if ((other == null) || (other.getClass() != this.getClass())) {
+            return false;
+        }
+        Vector2d that = (Vector2d) other;
+        return Integer.compare(this.x, that.x) == 0 && Integer.compare(this.y, that.y) == 0;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + x;
+        hash = 31 * hash + y;
+        return hash;
     }
 }
