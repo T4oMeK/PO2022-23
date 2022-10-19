@@ -1,5 +1,5 @@
 package agh.ics.oop;
-import static agh.ics.oop.MapDirection.NORTH;
+
 import static java.lang.System.out;
 
 public class World {
