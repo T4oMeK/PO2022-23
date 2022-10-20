@@ -37,18 +37,24 @@ public class World {
     }
     public static void main(String[] args) {
         out.println("Start");
-        run(toDirection(args));
+        /*Animal pies = new Animal();
+        out.println(pies.toString());
+        pies.move(MoveDirection.RIGHT);
+        pies.move(MoveDirection.BACKWARD);
+        pies.move(MoveDirection.RIGHT);
+        pies.move(MoveDirection.FORWARD);
+        pies.move(MoveDirection.FORWARD);
+        pies.move(MoveDirection.LEFT);
+        pies.move(MoveDirection.BACKWARD);
+        out.println(pies.toString());*/
+        Animal kot = new Animal();
+        out.println(kot.toString());
+        kot.move(MoveDirection.FORWARD);
+        kot.move(MoveDirection.FORWARD);
+        kot.move(MoveDirection.FORWARD);
+        kot.move(MoveDirection.FORWARD);
+        out.println(kot.toString());
         out.println("Stop");
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-        out.println(MapDirection.toString(MapDirection.NORTH));
-        out.println(MapDirection.toString(MapDirection.next(MapDirection.NORTH)));
-        out.println(MapDirection.toString(MapDirection.previous(MapDirection.NORTH)));
-        Vector2d testres = MapDirection.toUnitVector(MapDirection.NORTH);
-        out.println(testres.toString());
     }
 }
 
