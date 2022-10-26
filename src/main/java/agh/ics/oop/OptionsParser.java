@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 
 public class OptionsParser {
-    public ArrayList<MoveDirection> parse(String[] args) {
+    public static ArrayList<MoveDirection> parse(String[] args) {
         ArrayList<MoveDirection> list = new ArrayList<MoveDirection>();
         for (String arg : args) {
             switch (arg) {

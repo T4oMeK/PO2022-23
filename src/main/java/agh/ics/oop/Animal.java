@@ -10,6 +10,9 @@ public class Animal {
         return position.toString() + " " + MapDirection.toString(this.orientation);
     }
 
+    public MapDirection getOrientation() {
+        return this.orientation;
+    }
     public boolean isAt(Vector2d position) {
         return this.position.equals(position);
     }
