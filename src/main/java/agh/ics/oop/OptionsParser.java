@@ -1,10 +1,10 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class OptionsParser {
-    public static ArrayList<MoveDirection> parse(String[] args) {
-        ArrayList<MoveDirection> list = new ArrayList<MoveDirection>();
+    public static LinkedList<MoveDirection> parse(String[] args) {
+        LinkedList<MoveDirection> list = new LinkedList<>();
         for (String arg : args) {
             switch (arg) {
                 case "b", "backward" -> list.add(MoveDirection.BACKWARD);

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
@@ -17,8 +17,8 @@ public class AnimalTest {
     public static void verParse() {
         String[] args = {"f", "r", "right", "roght", "lefr", "backward", "b", "f", "forward",
                 "forward", "f", "r", "f", "f", "f", "l", "r", "l", "l"};
-        ArrayList<MoveDirection> dirs = OptionsParser.parse(args);
-        ArrayList<MoveDirection> exp = new ArrayList<MoveDirection>();
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
+        LinkedList<MoveDirection> exp = new LinkedList<>();
         exp.add(MoveDirection.FORWARD);
         exp.add(MoveDirection.RIGHT);
         exp.add(MoveDirection.RIGHT);
@@ -43,7 +43,7 @@ public class AnimalTest {
     public void verOrientation() {
         Animal dog = new Animal();
         String[] args = {"r", "f", "f", "f", "l", "r", "l", "l", "left"};
-        ArrayList<MoveDirection> dirs = OptionsParser.parse(args);
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
         MapDirection[] faces = {MapDirection.EAST, MapDirection.EAST, MapDirection.EAST, MapDirection.EAST,
         MapDirection.NORTH, MapDirection.EAST, MapDirection.NORTH, MapDirection.WEST, MapDirection.SOUTH};
         int i = 0;
@@ -60,9 +60,9 @@ public class AnimalTest {
         String[] args1 = {"f", "f", "r", "f"};
         String[] args2 = {"b", "l", "l", "f"};
         String[] args3 = {"r", "b", "b"};
-        ArrayList<MoveDirection> dirs1 = OptionsParser.parse(args1);
-        ArrayList<MoveDirection> dirs2 = OptionsParser.parse(args2);
-        ArrayList<MoveDirection> dirs3 = OptionsParser.parse(args3);
+        LinkedList<MoveDirection> dirs1 = OptionsParser.parse(args1);
+        LinkedList<MoveDirection> dirs2 = OptionsParser.parse(args2);
+        LinkedList<MoveDirection> dirs3 = OptionsParser.parse(args3);
         for(MoveDirection dir: dirs1) {
             dog.move(dir);
         }
@@ -81,7 +81,7 @@ public class AnimalTest {
     public void verBorders() {
         Animal cat = new Animal();
         String[] args = {"f", "f", "f", "f", "l", "f", "f", "f", "f", "l", "f", "f", "f", "f", "f", "f"};
-        ArrayList<MoveDirection> dirs = OptionsParser.parse(args);
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
         for (MoveDirection dir : dirs) {
             cat.move(dir);
         }

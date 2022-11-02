@@ -1,7 +1,11 @@
 package agh.ics.oop;
 
+import org.w3c.dom.css.Rect;
+
 import static java.lang.System.out;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class World {
     public static void run(Direction[] dirs) {
         for(Direction argument: java.util.Arrays.copyOfRange(dirs, 0, dirs.length - 1)) {
@@ -19,31 +23,13 @@ public class World {
             }
         }
     }
-    public static Direction[] toDirection(String[] args){
-        Direction[] dirArgs = new Direction[args.length];
-
-        for (int i = 0; i < args.length; ++i) {
-            Direction conv;
-            switch (args[i]) {
-                case "f" -> conv = Direction.FORWARD;
-                case "b" -> conv = Direction.BACKWARD;
-                case "l" -> conv = Direction.LEFT;
-                case "r" -> conv = Direction.RIGHT;
-                default -> conv = null;
-            }
-                dirArgs[i] = conv;
-        }
-        return dirArgs;
-    }
     public static void main(String[] args) {
         out.println("Start");
-        Animal pies = new Animal();
-        ArrayList<MoveDirection> dirs = OptionsParser.parse(args);
-        out.println(pies.toString());
-        for (MoveDirection dir : dirs) {
-            pies.move(dir);
-        }
-        out.println(pies.toString());
+        LinkedList<MoveDirection> directions = OptionsParser.parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
         out.println("Stop");
     }
 }
