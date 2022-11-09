@@ -16,15 +16,16 @@ public class SimulationEngine implements IEngine {
     @Override
     public void run() {
         for (Vector2d position: initialPositions) {
-            map.place(new Animal(this.map, position));
+            this.map.place(new Animal(this.map, position));
         }
-        int n = ((RectangularMap) map).getAnimalsNum();
+        int n = ((AbstractWorldMap) this.map).getAnimalsNum();
         if (n != 0) {
             int i = 0;
             for (MoveDirection dir : dirs) {
-                ((RectangularMap) this.map).getAnimal(i % n).move(dir);
-                i += 1;
+                ((AbstractWorldMap) this.map).getAnimal(i).move(dir);
+                i = (i+1) % n;
             }
         }
+        System.out.println(this.map);
     }
 }
