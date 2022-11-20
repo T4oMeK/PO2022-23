@@ -7,8 +7,7 @@ import java.util.LinkedList;
 import static org.testng.Assert.assertEquals;
 
 public class EngineTest {
-    @Test
-    public static void verRun() {
+    /*public static void verRun() {
         String[] args1 = {"f", "b", "r", "l"};
         String[] args2 = {"f", "f", "r", "r"};
         String[] args3 = {"f", "f", "f", "f", "f", "f", "f", "f"};
@@ -40,5 +39,5 @@ public class EngineTest {
         assertEquals(((RectangularMap) map).getAnimal(1).getPosition(), pos2);
         assertEquals(((RectangularMap) map).getAnimal(0).getOrientation(), MapDirection.SOUTH);
         assertEquals(((RectangularMap) map).getAnimal(1).getOrientation(), MapDirection.NORTH);
-    }
+    }*/
 }
