@@ -7,8 +7,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
 
@@ -17,7 +19,10 @@ public class AnimalTest {
     public static void verParse() {
         String[] args = {"f", "r", "right", "roght", "lefr", "backward", "b", "f", "forward",
                 "forward", "f", "r", "f", "f", "f", "l", "r", "l", "l"};
-        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
+        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(List.of(args)));
+        String[] argsGood = {"f", "r", "right", "backward", "b", "f", "forward",
+                "forward", "f", "r", "f", "f", "f", "l", "r", "l", "l"};
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(List.of(argsGood));
         LinkedList<MoveDirection> exp = new LinkedList<>();
         exp.add(MoveDirection.FORWARD);
         exp.add(MoveDirection.RIGHT);
@@ -43,7 +48,7 @@ public class AnimalTest {
     public void verOrientation() {
         Animal dog = new Animal();
         String[] args = {"r", "f", "f", "f", "l", "r", "l", "l", "left"};
-        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(List.of(args));
         MapDirection[] faces = {MapDirection.EAST, MapDirection.EAST, MapDirection.EAST, MapDirection.EAST,
         MapDirection.NORTH, MapDirection.EAST, MapDirection.NORTH, MapDirection.WEST, MapDirection.SOUTH};
         int i = 0;
@@ -60,9 +65,9 @@ public class AnimalTest {
         String[] args1 = {"f", "f", "r", "f"};
         String[] args2 = {"b", "l", "l", "f"};
         String[] args3 = {"r", "b", "b"};
-        LinkedList<MoveDirection> dirs1 = OptionsParser.parse(args1);
-        LinkedList<MoveDirection> dirs2 = OptionsParser.parse(args2);
-        LinkedList<MoveDirection> dirs3 = OptionsParser.parse(args3);
+        LinkedList<MoveDirection> dirs1 = OptionsParser.parse(List.of(args1));
+        LinkedList<MoveDirection> dirs2 = OptionsParser.parse(List.of(args2));
+        LinkedList<MoveDirection> dirs3 = OptionsParser.parse(List.of(args3));
         for(MoveDirection dir: dirs1) {
             dog.move(dir);
         }
@@ -79,9 +84,9 @@ public class AnimalTest {
 
     @Test
     public void verBorders() {
-        Animal cat = new Animal();
+        Animal cat = new Animal(new RectangularMap(5, 5));
         String[] args = {"f", "f", "f", "f", "l", "f", "f", "f", "f", "l", "f", "f", "f", "f", "f", "f"};
-        LinkedList<MoveDirection> dirs = OptionsParser.parse(args);
+        LinkedList<MoveDirection> dirs = OptionsParser.parse(List.of(args));
         for (MoveDirection dir : dirs) {
             cat.move(dir);
         }

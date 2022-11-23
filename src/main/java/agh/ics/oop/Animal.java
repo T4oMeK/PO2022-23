@@ -53,7 +53,10 @@ public class Animal implements IPositionChangeObserver {
             }
         }
 
-        if ((newpos != null) && this.map.canMoveTo(newpos)) {
+        if ((newpos != null) && (this.map != null) && this.map.canMoveTo(newpos)) {
+            this.position = newpos;
+        }
+        if ((newpos != null) && this.map == null) {
             this.position = newpos;
         }
     }

@@ -7,6 +7,7 @@ import org.w3c.dom.css.Rect;
 import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class World {
     public static void run(Direction[] dirs) {
@@ -26,14 +27,6 @@ public class World {
         }
     }
     public static void main(String[] args) {
-        out.println("Start");
-        LinkedList<MoveDirection> directions = OptionsParser.parse(args);
-        IWorldMap map = new GrassField(10);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
-        out.println(((AbstractWorldMap) map).getAnimal(new Vector2d(2, 4)));
-        out.println("Stop");
         Application.launch(App.class, args);
     }
 }

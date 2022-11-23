@@ -4,12 +4,13 @@ import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SimulationEngine implements IEngine {
     private IWorldMap map;
     private LinkedList<MoveDirection> dirs;
     private Vector2d[] initialPositions;
-    private ArrayList<Animal> animals = new ArrayList<>();
+    private List<Animal> animals = new ArrayList<>();
     public SimulationEngine(LinkedList<MoveDirection> dirs, IWorldMap map, Vector2d[] initialPositions) {
         this.dirs = dirs;
         this.map = map;
@@ -21,8 +22,9 @@ public class SimulationEngine implements IEngine {
             Animal animal = new Animal(this.map, position);
             animal.addObserver((AbstractWorldMap) this.map);
             this.map.place(animal);
-            animals.add(animal);
         }
+
+        animals = ((AbstractWorldMap) this.map).getAnimals();
         int n = animals.size();
         if (n != 0) {
             int i = 0;
@@ -34,6 +36,5 @@ public class SimulationEngine implements IEngine {
                 i = (i+1) % n;
             }
         }
-        System.out.println(this.map);
     }
 }

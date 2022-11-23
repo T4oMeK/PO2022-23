@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertThrows;
 import static org.testng.AssertJUnit.*;
 
 public class MapTests {
@@ -13,7 +14,7 @@ public class MapTests {
         Animal animal3 = new Animal(map, new Vector2d(6, 7));
         map.place(animal1);
         map.place(animal2);
-        map.place(animal3);
+        assertThrows(IllegalArgumentException.class, () -> map.place(animal3));
         assertTrue(map.isOccupied(new Vector2d(4,4)));
         assertTrue(map.isOccupied(new Vector2d(3,4)));
         assertFalse(map.isOccupied(new Vector2d(6,7)));
@@ -35,6 +36,7 @@ public class MapTests {
         map.place(animal1);
         map.place(animal2);
         map.place(animal3);
+        assertThrows(IllegalArgumentException.class, () -> map.place(animal3));
         assertTrue(map.isOccupied(new Vector2d(-5,-20)));
         assertTrue(map.isOccupied(new Vector2d(-7000,4000)));
         assertFalse(map.isOccupied(new Vector2d(-4,-567)));

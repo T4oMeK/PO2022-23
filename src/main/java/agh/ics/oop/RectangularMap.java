@@ -21,10 +21,10 @@ public class RectangularMap extends AbstractWorldMap {
         }
         return false;
     }
-    protected Vector2d findLowerLeft() {
+    public Vector2d findLowerLeft() {
         return this.lowerLeft;
     }
-    protected Vector2d findUpperRight() {
+    public Vector2d findUpperRight() {
         return this.upperRight;
     }
 }

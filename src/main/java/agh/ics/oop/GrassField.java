@@ -1,23 +1,26 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GrassField extends AbstractWorldMap {
     private ArrayList<Grass> patches = new ArrayList<>();
+    private MapBoundary objects = new MapBoundary();
     private int range;
     public GrassField(int tiles) {
         range = ((int) Math.floor(Math.sqrt(tiles*10)));
         for (int i = 0; i < tiles;) {
             Vector2d toAdd = new Vector2d(ThreadLocalRandom.current().nextInt(0, range), ThreadLocalRandom.current().nextInt(0, range));
             if (!isOccupied(toAdd)) {
-                patches.add(new Grass(toAdd));
+                Grass patch = new Grass(toAdd);
+                patches.add(patch);
+                objects.add(patch);
                 ++i;
             }
         }
     }
 
-    // for testing purposes
     public Grass getPatch(int n) { return patches.get(n); }
     @Override
     public boolean isOccupied(Vector2d position) {
@@ -34,6 +37,17 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        super.positionChanged(oldPosition, newPosition);
+        objects.positionChanged(oldPosition, newPosition);
+    }
+    @Override
+    public void place(Animal animal) {
+        super.place(animal);
+        objects.add(animal);
+    }
+
+    @Override
     public Object objectAt(Vector2d position) {
         Object object = super.objectAt(position);
         if (object == null)
@@ -45,25 +59,11 @@ public class GrassField extends AbstractWorldMap {
         return object;
     }
 
-    protected Vector2d findLowerLeft() {
-        Vector2d lowerLeft = new Vector2d(range, range);
-        for (Vector2d key: animals.keySet()) {
-            lowerLeft = lowerLeft.lowerLeft(key);
-        }
-        for (Grass patch: this.patches) {
-            lowerLeft = lowerLeft.lowerLeft(patch.getPosition());
-        }
-        return lowerLeft;
+    public Vector2d findLowerLeft() {
+        return objects.lowerLeft();
     }
 
-    protected Vector2d findUpperRight() {
-        Vector2d upperRight = new Vector2d(0, 0);
-        for (Vector2d key: animals.keySet()) {
-            upperRight = upperRight.upperRight(key);
-        }
-        for (Grass patch: this.patches) {
-            upperRight = upperRight.upperRight(patch.getPosition());
-        }
-        return upperRight;
+    public Vector2d findUpperRight() {
+        return objects.upperRight();
     }
 }
