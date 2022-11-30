@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Animal implements IPositionChangeObserver {
+public class Animal implements IPositionChangeObserver, IMapElement {
     private Vector2d position = new Vector2d(2, 2);
     private MapDirection orientation = MapDirection.NORTH;
     private IWorldMap map;
@@ -59,5 +59,18 @@ public class Animal implements IPositionChangeObserver {
         if ((newpos != null) && this.map == null) {
             this.position = newpos;
         }
+    }
+
+    public String toImage() {
+        return switch(orientation) {
+            case NORTH -> "src/main/resources/up.png";
+            case EAST -> "src/main/resources/right.png";
+            case SOUTH -> "src/main/resources/down.png";
+            case WEST -> "src/main/resources/left.png";
+        };
+    }
+
+    public String toLabel() {
+        return "Z (" + position.x + ", " + position.y + ")";
     }
 }
